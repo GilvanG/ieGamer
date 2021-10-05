@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const StyleFooter = styled.footer`
+const FooterContainer = styled.footer`
   padding: 1rem;
   background-color: var(--secundary);
   
@@ -15,9 +15,9 @@ const StyleFooter = styled.footer`
 
 const Footer = ({ children }) => (
   <div>
-    <StyleFooter>
+    <FooterContainer>
       {children}
-    </StyleFooter>
+    </FooterContainer>
   </div>
 );
 

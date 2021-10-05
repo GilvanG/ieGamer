@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 /* eslint-disable react/prop-types */
 import React, { createContext, useState, useContext } from 'react';
 import products from '../products.json';
@@ -11,6 +10,7 @@ const CartContext = createContext({
   qtdItemTotal: Number.prototype,
   freight: Number.prototype,
   purchaseValue: Number.prototype,
+  finalPurchaseValue: Number.prototype,
 });
 
 const CartProvider = ({ children }) => {
@@ -18,6 +18,7 @@ const CartProvider = ({ children }) => {
   const [qtdItemTotal, setQtdItemTotal] = useState(0);
   const [freight, setFreight] = useState(0);
   const [purchaseValue, setPurchaseValue] = useState(0);
+  const [finalPurchaseValue, setFinalPurchaseValue] = useState(0);
 
   const itemIsCart = (id) => id === { ...cartItens.find((element) => element.id === id) || { id: 'q' } }.id;
 
@@ -34,13 +35,15 @@ const CartProvider = ({ children }) => {
     } else {
       setCartItens([...cartItens, { id: itemId, qtd: 1 }]);
     }
-
+    const priceItem = products.find((element) => element.id === itemId).price;
     setFreight(qtdItemTotal * 10 + 10);
-    if (purchaseValue + products.find((element) => element.id === itemId).price > 250) {
+    setFinalPurchaseValue(qtdItemTotal * 10 + 10 + purchaseValue + priceItem);
+    if (purchaseValue + priceItem > 250) {
       setFreight(0);
+      setFinalPurchaseValue(purchaseValue + priceItem);
     }
     setQtdItemTotal(qtdItemTotal + 1);
-    setPurchaseValue(purchaseValue + products.find((element) => element.id === itemId).price);
+    setPurchaseValue(purchaseValue + priceItem);
   };
 
   const removeInCart = async (itemId) => {
@@ -56,8 +59,10 @@ const CartProvider = ({ children }) => {
       const priceItem = products.find((element) => element.id === itemId).price;
       setFreight(qtdItemTotal * 10 - 10);
       setQtdItemTotal(qtdItemTotal - 1);
+      setFinalPurchaseValue(qtdItemTotal * 10 - 10 + purchaseValue - priceItem);
       if (purchaseValue - priceItem > 250) {
         setFreight(0);
+        setFinalPurchaseValue(purchaseValue - priceItem);
       }
       setPurchaseValue(purchaseValue - priceItem);
     }
@@ -65,7 +70,14 @@ const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider value={{
-      cartItens, insertInCart, qtdItem, removeInCart, qtdItemTotal, freight, purchaseValue,
+      cartItens,
+      insertInCart,
+      qtdItem,
+      removeInCart,
+      qtdItemTotal,
+      freight,
+      purchaseValue,
+      finalPurchaseValue,
     }}
     >
       { children }
@@ -78,9 +90,17 @@ export default CartProvider;
 export const useCart = () => {
   const Cart = useContext(CartContext);
   const {
-    cartItens, insertInCart, qtdItem, removeInCart, qtdItemTotal, freight, purchaseValue,
+    cartItens, insertInCart, qtdItem, removeInCart,
+    qtdItemTotal, freight, purchaseValue, finalPurchaseValue,
   } = Cart;
   return {
-    cartItens, insertInCart, qtdItem, removeInCart, qtdItemTotal, freight, purchaseValue,
+    cartItens,
+    insertInCart,
+    qtdItem,
+    removeInCart,
+    qtdItemTotal,
+    freight,
+    purchaseValue,
+    finalPurchaseValue,
   };
 };

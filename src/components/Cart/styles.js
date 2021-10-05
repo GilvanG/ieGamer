@@ -99,10 +99,23 @@ Cart.Open.Title = styled.div`
 `;
 
 Cart.Open.Price = styled.span`
-  font-size: 60%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: 40%;
   font-weight: normal;
   @media (max-width: 800px) {
-    font-size: 50%;
+    font-size: 30%;
+  }
+`;
+
+Cart.Open.PriceFinal = styled.span`
+  font-size: 5vh;
+  font-weight: normal;
+  margin-bottom: 2.5vh;
+  @media (max-width: 800px) {
+    font-size: 2.5vh;
+    margin-bottom: 8vh;
   }
 `;
 
@@ -123,6 +136,7 @@ Cart.Open.ItemInCart = styled.p`
   flex-direction: ;
   justify-content: center; */
 `;
+
 Cart.Open.Button = styled.div`
   font-size: 40%;
   display: inline-flex;
@@ -135,7 +149,7 @@ Cart.Open.Button = styled.div`
   border-width: 0.5vh;
   
   position: absolute;
-  bottom: 1.5%;
+  bottom: 2.5%;
   right: 2.5%;
   width: auto;
   text-align: center;
@@ -150,6 +164,7 @@ Cart.Open.Button = styled.div`
     bottom: 1.5%;
   }
 `;
+
 Cart.Open.ListCart = styled.span`
   display: flex;
   justify-content: right;

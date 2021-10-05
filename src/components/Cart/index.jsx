@@ -8,7 +8,7 @@ import Cart from './styles';
 const Cartt = () => {
   const [visibilityMenuCart, setVisibilityMenuCart] = useState(false);
   const {
-    cartItens, purchaseValue, freight,
+    cartItens, purchaseValue, freight, finalPurchaseValue,
   } = useCart();
   return (
     <Cart>
@@ -59,28 +59,35 @@ const Cartt = () => {
             { purchaseValue
               ? (
                 <>
+                  <hr />
                   <Cart.Open.Price>
-                    <hr />
-                    <span>
+                    <span style={{ marginBottom: '1.5%' }}>
                       <b>
                         Valor da Compra:
                       </b>
                       {' R$'}
                       {purchaseValue.toFixed(2)}
                     </span>
-                    <br />
-                    <span>
+                    <span style={{ marginBottom: '2.5%' }}>
                       <b>
                         Frete:
                       </b>
                       {' R$'}
                       {freight.toFixed(2)}
                     </span>
+                    <Cart.Open.PriceFinal>
+                      <span>
+                        <b>
+                          ValorFinal:
+                        </b>
+                        {' R$'}
+                        {finalPurchaseValue.toFixed(2)}
+                      </span>
+                    </Cart.Open.PriceFinal>
                   </Cart.Open.Price>
                   <Cart.Open.Button>
                     Finalizar Compra
                   </Cart.Open.Button>
-                  <br />
                 </>
               )
               : <></> }
