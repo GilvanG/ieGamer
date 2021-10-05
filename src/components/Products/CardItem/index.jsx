@@ -31,7 +31,7 @@ const CardItem = ({
               {' '}
               {price}
             </p>
-            {qtdItem(id) ? (
+            {qtdItem(id) > 0 ? (
               <Item.Qtd>
                 <Button onClick={() => removeInCart(id)}> - </Button>
                 <Input value={qtdItem(id)} />

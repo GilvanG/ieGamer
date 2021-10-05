@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/prop-types */
 import React, { createContext, useState, useContext } from 'react';
 import products from '../products.json';
@@ -26,7 +27,7 @@ const CartProvider = ({ children }) => {
       : 0
   );
 
-  const insertInCart = (itemId) => {
+  const insertInCart = async (itemId) => {
     if (itemIsCart(itemId)) {
       setCartItens([...cartItens.filter((element) => element.id !== itemId),
         { id: itemId, qtd: qtdItem(itemId) + 1 }]);
@@ -34,44 +35,37 @@ const CartProvider = ({ children }) => {
       setCartItens([...cartItens, { id: itemId, qtd: 1 }]);
     }
 
+    setFreight(qtdItemTotal * 10 + 10);
+    if (purchaseValue + products.find((element) => element.id === itemId).price > 250) {
+      setFreight(0);
+    }
     setQtdItemTotal(qtdItemTotal + 1);
     setPurchaseValue(purchaseValue + products.find((element) => element.id === itemId).price);
-
-    if (purchaseValue > 250) {
-      setFreight(0);
-    } else {
-      setFreight(freight + 10);
-    }
   };
 
-  const removeInCart = (itemId) => {
+  const removeInCart = async (itemId) => {
     if (itemIsCart(itemId)) {
       const qtd = qtdItem(itemId);
-      if (qtd > 2) {
+      if (qtd > 1) {
         setCartItens([...cartItens.filter((element) => element.id !== itemId),
           { id: itemId, qtd: qtdItem(itemId) - 1 }]);
       } else {
         setCartItens([...cartItens.filter((element) => element.id !== itemId)]);
       }
 
-      setQtdItemTotal(qtdItemTotal - 1);
       const priceItem = products.find((element) => element.id === itemId).price;
-      setPurchaseValue(purchaseValue - priceItem);
-
-      if (purchaseValue + priceItem > 250 && purchaseValue <= 250) {
-        for (let i = 0; i < cartItens.length; i += 1) {
-          setFreight(freight + cartItens[i].qtd
-              * products.find((element) => element.id === cartItens[i].id).price);
-        }
-      } else if (purchaseValue + priceItem <= 250) {
-        setFreight(freight - 10);
+      setFreight(qtdItemTotal * 10 - 10);
+      setQtdItemTotal(qtdItemTotal - 1);
+      if (purchaseValue - priceItem > 250) {
+        setFreight(0);
       }
+      setPurchaseValue(purchaseValue - priceItem);
     }
   };
 
   return (
     <CartContext.Provider value={{
-      cartItens, insertInCart, qtdItem, removeInCart,
+      cartItens, insertInCart, qtdItem, removeInCart, qtdItemTotal, freight, purchaseValue,
     }}
     >
       { children }

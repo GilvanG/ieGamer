@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyleHeader = styled.header`
   padding: 1rem;
-  background-color: var(--primary);
+  background-color: var(--secundary);
   
   display: flex;
   align-items: center;

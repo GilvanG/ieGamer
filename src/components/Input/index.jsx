@@ -20,12 +20,12 @@ const InputBasic = styled.input`
   /* margin-bottom: 25px; */
 `;
 
-export default function Input({ Change, inText, value }) {
+export default function Input({ value }) {
   return (
     <div>
       <InputBasic
-        onChange={Change}
-        placeholder={inText}
+        // onChange={Change}
+        // placeholder={inText}
         value={value}
         disabled
       />
@@ -33,8 +33,8 @@ export default function Input({ Change, inText, value }) {
   );
 }
 Input.propTypes = {
-  Change: PropTypes.func.isRequired,
-  inText: PropTypes.string.isRequired,
+  // Change: PropTypes.func.isRequired,
+  // inText: PropTypes.string.isRequired,
   // name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
 };

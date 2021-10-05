@@ -1,15 +1,17 @@
 import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import CartProvider from '../../context/Cart';
 import Products from '../../components/Products';
 import BannerMain from '../../components/Banner';
-import CartProvider from '../../context/Cart';
+import Cartt from '../../components/Cart';
 
 function App() {
   return (
     <CartProvider>
       <Header>
         IE Gamer
+        <Cartt />
       </Header>
       <BannerMain
         title="IAI Gamer?"

@@ -21,7 +21,7 @@ Filter.List = styled.select`
   background-color: var(--grayMedium);
   font-size: 1rem;
   border: none;
-  z-index: 10;
+  z-index: 9;
   padding-right: 0.1rem;
   outline: none;
   &:focus, &:active {

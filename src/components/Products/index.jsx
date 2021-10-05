@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
-// import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CardItem from './CardItem';
 import products from '../../products.json';
 import { ListItem, Filter } from './styles';
@@ -43,7 +41,6 @@ const Products = () => {
         </Filter.List>
       </Filter>
       <ListItem>
-        {/* <FontAwesomeIcon icon={faAngleDown} /> */}
         {items}
       </ListItem>
     </div>
