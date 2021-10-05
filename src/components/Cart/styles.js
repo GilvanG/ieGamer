@@ -15,6 +15,7 @@ Cart.Button = styled.div`
   border-width: 0.25rem;
   border-radius: 5rem;
   &:hover {
+    cursor: pointer;
     background: #141454;
     background: #0A0AA4;
   }
@@ -27,6 +28,7 @@ Cart.Close = styled.div`
   width:100%;
   padding: 1rem 2rem 0 2rem;
   text-align: right;
+  cursor: pointer;
   @media (max-width: 800px) {
     padding: 0.1rem 0.2rem 0 0.2rem;
     width: 98%;
@@ -138,6 +140,7 @@ Cart.Open.Button = styled.div`
   width: auto;
   text-align: center;
   &:hover {
+    cursor: pointer;
     color: var(--white);
     border-color: var(--white);
     background: var(--primary);//#141454;
