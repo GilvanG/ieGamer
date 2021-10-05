@@ -13,8 +13,10 @@ const Products = () => {
   )));
   useEffect(() => {
     setItems('Carregando');
-    if (filter === 'Price') {
+    if (filter === 'MPrice') {
       products.sort((a, b) => a.price - b.price);
+    } else if (filter === 'LPrice') {
+      products.sort((a, b) => b.price - a.price);
     } else if (filter === 'Score') {
       products.sort((a, b) => a.score - b.score);
     } else if (filter === 'Name') {
@@ -31,13 +33,18 @@ const Products = () => {
       <Filter>
         <Filter.Title>Ordenar Por:</Filter.Title>
         <Filter.List id="mySelect" onChange={() => setFilter(document.getElementById('mySelect').value)}>
-          <Filter.Item value="Price" className="Price">
-            Preço
+          <Filter.Item value="MPrice" className="Price">
+            Maior Preço
+          </Filter.Item>
+          <Filter.Item value="LPrice" className="Price">
+            Menor Preço
           </Filter.Item>
           <Filter.Item value="Score" className="Score">
             Popularidade
           </Filter.Item>
-          <Filter.Item value="Name" className="Name" selected>Ordem Alfabetica</Filter.Item>
+          <Filter.Item value="Name" className="Name" selected>
+            Ordem Alfabetica
+          </Filter.Item>
         </Filter.List>
       </Filter>
       <ListItem>
